@@ -1,0 +1,135 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[landscape,margin=0.1in]{geometry}   % compact margins
+\usepackage{multicol}                 % for 2-column layout
+\usepackage{hyperref}                 % clickable links
+\usepackage{parskip}                  % small paragraph spacing
+\usepackage{minted}
+\usepackage{graphicx}
+
+\setlength{\columnsep}{12pt}
+
+
+% Code style
+\setminted{
+  fontsize=\footnotesize,
+  breaklines,
+  breakanywhere,
+  tabsize=2
+}
+
+\begin{document}
+
+
+
+\begin{titlepage}
+  \centering
+
+  \vspace*{2cm}
+  {\Huge\bfseries ICPC Team Notebook\par}
+  \vspace{1cm}
+
+  {\Large {Sorbonne Lime}\par}
+  {\Large {Sorbonne Université}\par}
+  {\Large SWERC 2025\par}
+  \vspace{1.5cm}
+
+  \rule{\linewidth}{1.5pt}\par
+  \vspace{0.5cm}
+  \rule{\linewidth}{0.5pt}\par
+  \vspace{1.5cm}
+
+  {\LARGE \itshape A curated reference of algorithms and data structures\par}
+  \vspace{1cm}
+
+  \includegraphics[width=0.2 \textwidth]{img/logo.png}\par
+  \vspace{1cm}
+
+  {\large \today\par}
+
+  \clearpage
+\end{titlepage}
+
+
+\clearpage
+\tableofcontents
+
+\twocolumn
+
+\section{Data Structures}
+
+\subsection{union find}
+
+\textbf{Complexity:} nearly O(1) \\
+\begin{minted}{cpp}
+typedef struct union_find{
+    vector<int> rank, parent;
+    union_find(int n){
+        rank.resize(n, 0); parent.resize(n);
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+    int find(int i){
+        int root = parent[i];
+        if (parent[root] != root) return parent[i] = find(root);
+        return root;
+    }
+    void unite(int x, int y) {
+        int xRoot = find(x);
+        int yRoot = find(y);
+        if (xRoot == yRoot) return;
+        if (rank[xRoot] < rank[yRoot]) parent[xRoot] = yRoot;
+        else if (rank[yRoot] < rank[xRoot]) parent[yRoot] = xRoot;
+        else{
+            parent[yRoot] = xRoot;
+            rank[xRoot]++;
+        }
+    }
+} union_find;
+\end{minted}
+
+\section{Graph Algorithms}
+
+\subsection{Shortest Paths}
+
+\textbf{Complexity:} O(E+VlogV)\\
+\textbf{Use:} Finds the shortest path in an graph with no negative edges.\\
+\begin{minted}{cpp}
+vi dijkstra(const vector<vector<pii>>& adj, int src) {
+    vi dist(adj.size(), INT_MAX);
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    dist[src] = 0; q.push({0, src});
+    while (!q.empty()) {
+        auto [d, u] = q.top(); q.pop();
+        if (d != dist[u]) continue;
+        for (auto [v, w] : adj[u]) {
+            if (d+w < dist[v]) {
+                dist[v] = d+w;
+                q.push({d+w, v});
+            }
+        }
+    }
+    return dist;
+}
+\end{minted}
+\textbf{Complexity:} O(V*E)\\
+\textbf{Use:} Finds the shortest path in a graph. Detects negative cycles.\\
+\begin{minted}{cpp}
+vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
+	vector<int> dist(n, INT_MAX);
+	dist[src] = 0;
+	for (int i = 0; i < n; i++) {
+		for (vector<int> edge : edges) {
+			int u = edge[0];int v = edge[1];int wt = edge[2];
+			if (dist[u] != INT_MAX && dist[u] + wt < dist[v]) {
+                if(i == n - 1) return {-1};
+                dist[v] = dist[u] + wt;
+            }
+		}
+	}
+    return dist;
+}
+\end{minted}
+
+
+\end{document}
+
