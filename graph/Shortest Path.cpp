@@ -4,9 +4,8 @@ using namespace std;
 
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-// \textbf{Complexity:} O(E+VlogV)\\
-// \textbf{Use:} Finds the shortest path in an graph with no negative edges.\\
 
+// Find shortest paths from src (no negative weights). O((V+E)logV)
 vi dijkstra(const vector<vector<pii>>& adj, int src) {
     vi dist(adj.size(), INT_MAX);
     priority_queue<pii, vector<pii>, greater<pii>> q; 
@@ -23,9 +22,8 @@ vi dijkstra(const vector<vector<pii>>& adj, int src) {
     }
     return dist;
 }
-// \textbf{Complexity:} O(V*E)\\
-// \textbf{Use:} Finds the shortest path in a graph. Detects negative cycles.\\
 
+//Shortest paths from src (handles negative edges). Detects neg cycles. $O(VE)$
 vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
 	vector<int> dist(n, INT_MAX);
 	dist[src] = 0;
@@ -40,5 +38,19 @@ vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
 	}
     return dist;
 }
+
+// All-pairs shortest paths (neg edges ok, no neg cycles) $O(V^3)$ 
+// $graph[i][i]=0$, $graph[i][j]=w$ if edge $i->j$ else $INT\_MAX$
+vector<vi> floydWarshall(vector<vi> graph) {
+    int V = graph.size();
+    auto dist = graph; 
+    for (int k = 0; k < V; ++k)
+        for (int i = 0; i < V; ++i)
+            for (int j = 0; j < V; ++j)
+                if (dist[i][k] < INT_MAX && dist[k][j] < INT_MAX)
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+    return dist;
+}
+
 
 

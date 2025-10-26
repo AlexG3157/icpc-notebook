@@ -1,16 +1,15 @@
 \documentclass[10pt,a4paper]{article}
 
-\usepackage[landscape,margin=0.1in]{geometry}   % compact margins
-\usepackage{multicol}                 % for 2-column layout
-\usepackage{hyperref}                 % clickable links
-\usepackage{parskip}                  % small paragraph spacing
+\usepackage[landscape,margin=0.1in]{geometry}   
+\usepackage{multicol}                 
+\usepackage{hyperref}                 
+\usepackage{parskip}                  
 \usepackage{minted}
 \usepackage{graphicx}
 
 \setlength{\columnsep}{12pt}
 
 
-% Code style
 \setminted{
   fontsize=\footnotesize,
   breaklines,
@@ -29,7 +28,7 @@
   {\Huge\bfseries ICPC Team Notebook\par}
   \vspace{1cm}
 
-  {\Large {Sorbonne Lime}\par}
+  {\Large {typedef unsigned long long uwu}\par}
   {\Large {Sorbonne Université}\par}
   {\Large SWERC 2025\par}
   \vspace{1.5cm}
@@ -60,7 +59,7 @@
 
 \subsection{union find}
 
-\textbf{Complexity:} nearly O(1) \\
+\textbf{Complexity:} nearly O(1)
 \begin{minted}{cpp}
 typedef struct union_find{
     vector<int> rank, parent;
@@ -89,10 +88,112 @@ typedef struct union_find{
 
 \section{Graph Algorithms}
 
-\subsection{Shortest Paths}
+\subsection{Max Flow Min Cut}
 
-\textbf{Complexity:} O(E+VlogV)\\
-\textbf{Use:} Finds the shortest path in an graph with no negative edges.\\
+\textbf{Dinic's max flow} $O(EV^2)$ worst case, often $O(E\sqrt(V))$ in practice.
+Edges from reachable nodes after flow form a min cut.
+\begin{minted}{cpp}
+struct FlowEdge {
+    int v, u;
+    long long cap, flow = 0;
+    FlowEdge(int v, int u, long long cap) : v(v), u(u), cap(cap) {}
+};
+struct Dinic {
+    const long long flow_inf = 1e18;
+    vector<FlowEdge> edges;
+    vector<vi> adj;
+    int n, m = 0;
+    int s, t;
+    vi level, ptr;
+    queue<int> q;
+    Dinic(int n, int s, int t) : n(n), s(s), t(t) {
+        adj.resize(n);level.resize(n);ptr.resize(n);
+    }
+    void add_edge(int v, int u, long long cap) {
+        edges.emplace_back(v, u, cap);
+        edges.emplace_back(u, v, 0);
+        adj[v].push_back(m);
+        adj[u].push_back(m + 1);
+        m += 2;
+    }
+    bool bfs() {
+        while (!q.empty()) {
+            int v = q.front();
+            q.pop();
+            for (int id : adj[v]) {
+                if (edges[id].cap == edges[id].flow)
+                    continue;
+                if (level[edges[id].u] != -1)
+                    continue;
+                level[edges[id].u] = level[v] + 1;
+                q.push(edges[id].u);
+            }
+        }
+        return level[t] != -1;
+    }
+    long long dfs(int v, long long pushed) {
+        if (pushed == 0)
+            return 0;
+        if (v == t)
+            return pushed;
+        for (int& cid = ptr[v]; cid < (int)adj[v].size(); cid++) {
+            int id = adj[v][cid];
+            int u = edges[id].u;
+            if (level[v] + 1 != level[u])
+                continue;
+            long long tr = dfs(u, min(pushed, edges[id].cap - edges[id].flow));
+            if (tr == 0)
+                continue;
+            edges[id].flow += tr;
+            edges[id ^ 1].flow -= tr;
+            return tr;
+        }
+        return 0;
+    }
+    long long flow() {
+        long long f = 0;
+        while (true) {
+            fill(level.begin(), level.end(), -1);
+            level[s] = 0;
+            q.push(s);
+            if (!bfs())
+                break;
+            fill(ptr.begin(), ptr.end(), 0);
+            while (long long pushed = dfs(s, flow_inf)) {
+                f += pushed;
+            }
+        }
+        return f;
+    }
+    vector<pii> min_cut_edges() {
+        vector<bool> vis(n, false);
+        queue<int> q;
+        q.push(s);
+        vis[s] = true;
+        while (!q.empty()) {
+            int v = q.front(); q.pop();
+            for (int id : adj[v]) {
+                auto &e = edges[id];
+                if (!vis[e.u] && e.cap > e.flow) {
+                    vis[e.u] = true;
+                    q.push(e.u);
+                }
+            }
+        }
+        vector<pii> cut;
+        for (auto &e : edges) {
+            if (vis[e.v] && !vis[e.u] && e.cap > 0) {
+                cut.push_back({e.v, e.u});
+            }
+        }
+        return cut;
+    }
+};
+\end{minted}
+
+\subsection{Shortest Path}
+
+Find shortest paths from src (no negative weights). O((V+E)logV)
 \begin{minted}{cpp}
 vi dijkstra(const vector<vector<pii>>& adj, int src) {
     vi dist(adj.size(), INT_MAX);
@@ -111,8 +212,7 @@ vi dijkstra(const vector<vector<pii>>& adj, int src) {
     return dist;
 }
 \end{minted}
-\textbf{Complexity:} O(V*E)\\
-\textbf{Use:} Finds the shortest path in a graph. Detects negative cycles.\\
+Shortest paths from src (handles negative edges). Detects neg cycles. $O(VE)$
 \begin{minted}{cpp}
 vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
 	vector<int> dist(n, INT_MAX);
@@ -129,7 +229,20 @@ vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
     return dist;
 }
 \end{minted}
+All-pairs shortest paths (neg edges ok, no neg cycles) $O(V^3)$
+$graph[i][i]=0$, $graph[i][j]=w$ if edge $i->j$ else $INT\_MAX$
+\begin{minted}{cpp}
+vector<vi> floydWarshall(vector<vi> graph) {
+    int V = graph.size();
+    auto dist = graph;
+    for (int k = 0; k < V; ++k)
+        for (int i = 0; i < V; ++i)
+            for (int j = 0; j < V; ++j)
+                if (dist[i][k] < INT_MAX && dist[k][j] < INT_MAX)
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+    return dist;
+}
+\end{minted}
 
 
 \end{document}
-
