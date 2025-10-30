@@ -6,7 +6,8 @@ OUTPUT_FILE = "notebook.tex"
 
 SECTIONS = [
     ("Data Structures", "data"),
-    ("Graph Algorithms", "graph")
+    ("Graph Algorithms", "graph"),
+    ("Arrays", "array")
 ]
 
 IGNORE_PATTERNS = [

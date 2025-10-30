@@ -57,11 +57,36 @@
 
 \section{Data Structures}
 
+\subsection{Fenwick Tree}
+
+Point update, prefix and range sum, $O(log n)$, $O(n)$ build
+\begin{minted}{cpp}
+struct Fenwick {
+    int n; vector<ll> t; //using long long, int might overflow.
+    Fenwick(vector<ll>& a): n(a.size()), t(n+1,0) {
+        for(int i = 1; i <=n; i++) { // Builds tree from array in O(n)
+            t[i] += a[i-1];
+            int p = i+(i&-i);
+            if(p<=n) t[p] += t[i];
+        }
+    }
+    void add(int i,long long v){
+        for(;i<=n;i+=i&-i) t[i]+=v;
+    }
+    long long sum(int i){
+        long long r=0;
+        for(; i>0 ;i -= i&-i) r += t[i];
+        return r;
+    }
+    long long sum(int l,int r){ return sum(r)-sum(l-1); }
+};
+\end{minted}
+
 \subsection{union find}
 
 \textbf{Complexity:} nearly O(1)
 \begin{minted}{cpp}
-typedef struct union_find{
+struct union_find{
     vector<int> rank, parent;
     union_find(int n){
         rank.resize(n, 0); parent.resize(n);
@@ -241,6 +266,47 @@ vector<vi> floydWarshall(vector<vi> graph) {
                 if (dist[i][k] < INT_MAX && dist[k][j] < INT_MAX)
                     dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
     return dist;
+}
+\end{minted}
+
+\subsection{Toposort}
+
+Topological sort, works for non connected graphs.
+\begin{minted}{cpp}
+void dfs(int u, vector<vi> &adj, vi &vis, vi &res) {
+    vis[u] = 1;
+    for (int v : adj[u])
+        if (!vis[v])
+            dfs(v, adj, vis, res);
+    res.push_back(u);
+}
+vi toposort(vector<vi> &adj) {
+    int n = adj.size();
+    vi vis(n, 0), res;
+    for (int i = 1; i < n; i++)
+        if (!vis[i]) dfs(i, adj, vis, res);
+    reverse(res.begin(), res.end());
+    return res;
+}
+\end{minted}
+
+\section{Arrays}
+
+\subsection{Inversions}
+
+Count pairs where order flips between arrays. $O(n log n)$
+\begin{minted}{cpp}
+ll inversions(vi& a, vi& b) {
+    int n = a.size();
+    unordered_map<int,int> pos;
+    for (int i = 0; i < n; i++) pos[b[i]] = i + 1;
+    Fenwick t(n); // C.f. Fenwick tree
+    ll inv = 0;
+    for (int i = 0; i < n; i++) {
+        inv += i - t.sum(pos[a[i]]);
+        t.add(pos[a[i]], 1);
+    }
+    return inv;
 }
 \end{minted}
 

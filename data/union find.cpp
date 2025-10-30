@@ -3,7 +3,7 @@
 using namespace std;
 
 // \textbf{Complexity:} nearly O(1)
-typedef struct union_find{
+struct union_find{
     vector<int> rank, parent;
     union_find(int n){
         rank.resize(n, 0); parent.resize(n);
