@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// \textbf{Complexity:} nearly O(1)
+// \textbf{Complexity:} effectively O(1)
 struct union_find{
     vector<int> rank, parent;
     union_find(int n){
