@@ -55,6 +55,55 @@
 
 \twocolumn
 
+\section{Number Theory}
+
+\subsection{Euler totient}
+
+Number of ints $\leq$ n coprime to n (c.f. sieve for primes).
+\begin{minted}{cpp}
+int phi(int n, vi& primes) {
+    int res = n;
+    for (int p : primes) {
+        if (1LL * p * p > n) break;
+        if (n % p == 0) {
+            while (n % p == 0) n /= p;
+            res -= res / p;
+        }
+    }
+    if (n > 1) res -= res / n;
+    return res;
+}
+\end{minted}
+
+\subsection{Fast exponentiation}
+
+$O(\log b)$: fast $a^b \bmod p$.
+\begin{minted}{cpp}
+int modular_exp(int a, int b, int p){
+    int res = 1;
+    while(b > 0){
+        if(b & 1) res = (1LL * a * res) % p;
+        b = b >> 1;
+        a = (1LL * a * a) % p;
+    }
+    return res;
+}
+\end{minted}
+
+\subsection{Sieve of Eratosthenes}
+
+$O(n \log \log n)$ sieve[i] = 0 if i prime, spf otherwise for fast fact
+\begin{minted}{cpp}
+vi sieve(int n){
+    vi sieve(n,0);
+    for(int i = 2; i*i < n ; i++)
+        if(!sieve[i])
+            for(int j = i*i ; j <n ; j += i)
+                if(!sieve[j]) sieve[j] = i;
+    return sieve;
+}
+\end{minted}
+
 \section{Data Structures}
 
 \subsection{Fenwick Tree}
@@ -225,7 +274,7 @@ vi dijkstra(const vector<vector<pii>>& adj, int src) {
     return dist;
 }
 \end{minted}
-Shortest paths from src (handles negative edges). Detects neg cycles. $O(VE)$
+$O(VE)$ Shortest Path+neg edges; BFS from nodes with dist $-\infty$ for all neg-cycle reachable.
 \begin{minted}{cpp}
 vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
 	vector<int> dist(n, INT_MAX);

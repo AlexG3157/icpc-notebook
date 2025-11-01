@@ -23,7 +23,7 @@ vi dijkstra(const vector<vector<pii>>& adj, int src) {
     return dist;
 }
 
-//Shortest paths from src (handles negative edges). Detects neg cycles. $O(VE)$
+// $O(VE)$ Shortest Path+neg edges; BFS from nodes with dist $-\infty$ for all neg-cycle reachable.
 vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
 	vector<int> dist(n, INT_MAX);
 	dist[src] = 0;
