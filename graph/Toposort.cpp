@@ -3,9 +3,7 @@
 using namespace std;
 
 typedef vector<int> vi;
-
-
-// Topological sort, works for non connected graphs.
+//TopoSort via DFS $O(V+E)$.
 void dfs(int u, vector<vi> &adj, vi &vis, vi &res) {
     vis[u] = 1;
     for (int v : adj[u])

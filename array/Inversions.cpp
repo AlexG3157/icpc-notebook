@@ -4,7 +4,7 @@
 using namespace std;
 typedef vector<int> vi;
 
-// Count pairs where order flips between arrays. $O(n log n)$
+// Count pairs where order flips between arrays. $O(n \log n)$
 ll inversions(vi& a, vi& b) {
     int n = a.size();
     unordered_map<int,int> pos;

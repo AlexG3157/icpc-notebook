@@ -4,7 +4,7 @@ using namespace std;
 
 typedef long long ll;
 
-// Point update, prefix and range sum, $O(log n)$, $O(n)$ build
+// Point update, prefix and range sum, $O(\log n)$, $O(n)$ build
 struct Fenwick {
     int n; vector<ll> t; //using long long, int might overflow.
     Fenwick(vector<ll>& a): n(a.size()), t(n+1,0) {

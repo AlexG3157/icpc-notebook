@@ -108,7 +108,7 @@ vi sieve(int n){
 
 \subsection{Fenwick Tree}
 
-Point update, prefix and range sum, $O(log n)$, $O(n)$ build
+Point update, prefix and range sum, $O(\log n)$, $O(n)$ build
 \begin{minted}{cpp}
 struct Fenwick {
     int n; vector<ll> t; //using long long, int might overflow.
@@ -157,14 +157,14 @@ struct union_find{
             rank[xRoot]++;
         }
     }
-} union_find;
+};
 \end{minted}
 
 \section{Graph Algorithms}
 
 \subsection{Max Flow Min Cut}
 
-\textbf{Dinic's max flow} $O(V^2E)$, $O(E\sqrt{V})$ for bipartite/unit
+\textbf{Dinic's max flow} $O(V^2E)$, $O(E\sqrt{V})$ for bipartite/unit.
 Edges from reachable nodes after flow form a min cut.
 \begin{minted}{cpp}
 struct FlowEdge {
@@ -308,7 +308,7 @@ vector<vi> floydWarshall(vector<vi> graph) {
 
 \subsection{Toposort}
 
-Topological sort, works for non connected graphs.
+TopoSort via DFS $O(V+E)$.
 \begin{minted}{cpp}
 void dfs(int u, vector<vi> &adj, vi &vis, vi &res) {
     vis[u] = 1;
@@ -331,7 +331,7 @@ vi toposort(vector<vi> &adj) {
 
 \subsection{Inversions}
 
-Count pairs where order flips between arrays. $O(n log n)$
+Count pairs where order flips between arrays. $O(n \log n)$
 \begin{minted}{cpp}
 ll inversions(vi& a, vi& b) {
     int n = a.size();

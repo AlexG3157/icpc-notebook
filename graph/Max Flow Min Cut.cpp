@@ -4,7 +4,7 @@ using namespace std;
 
 typedef vector<int> vi;
 typedef pair<int,int> pii;
-//\textbf{Dinic's max flow} $O(V^2E)$, $O(E\sqrt{V})$ for bipartite/unit
+//\textbf{Dinic's max flow} $O(V^2E)$, $O(E\sqrt{V})$ for bipartite/unit.
 //Edges from reachable nodes after flow form a min cut.
 struct FlowEdge {
     int v, u;

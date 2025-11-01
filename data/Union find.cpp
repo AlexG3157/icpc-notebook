@@ -26,5 +26,5 @@ struct union_find{
             rank[xRoot]++;
         }
     }
-} union_find;
+};
 
