@@ -40,7 +40,8 @@ def process_cpp_file(path):
                 code_block.append(raw)
 
     if code_block:
-        lines.append("\\begin{minted}{cpp}\n" + "\n".join(code_block) + "\n\\end{minted}\n")
+        lines.append("\\begin{minted}{cpp}\n" + "\n".join(code_block) + "\n\\end{minted}\n"+
+                     r"\noindent\makebox[\columnwidth]{\rule{\columnwidth}{0.4pt}}")
 
     return "".join(lines)
 

@@ -1,14 +1,16 @@
-\documentclass[10pt,a4paper]{article}
-
-\usepackage[landscape,margin=0.1in]{geometry}   
-\usepackage{multicol}                 
-\usepackage{hyperref}                 
-\usepackage{parskip}                  
-\usepackage{minted}
+\documentclass[10pt]{article}
+\usepackage[left=0.1in,right=0.1in,top=0.6in,bottom=0.1in]{geometry}
 \usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{minted} 
+\usepackage{pdflscape}
+\usepackage{hyperref}                 
 
-\setlength{\columnsep}{12pt}
-
+\pagestyle{fancy}
+\fancyhead[L]{Sorbonne Université}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
 
 \setminted{
   fontsize=\footnotesize,
@@ -17,44 +19,49 @@
   tabsize=2
 }
 
+\setlength{\columnsep}{12pt}       
+\setlength{\columnseprule}{0.4pt} 
+
 \begin{document}
+    \begin{landscape}
+        
+        \begin{titlepage}
+            \centering
+            \vspace*{2cm}
+            {\Huge\bfseries ICPC Team Notebook\par}
+            \vspace{1cm}
 
+            {\Large {typedef unsigned long long uwu}\par}
+            {\Large {Sorbonne Université}\par}
+            {\Large SWERC 2025\par}
+            \vspace{1.5cm}
 
+            \rule{\linewidth}{1.5pt}\par
+            \vspace{0.5cm}
+            \rule{\linewidth}{0.5pt}\par
+            \vspace{1.5cm}
 
-\begin{titlepage}
-  \centering
+            {\LARGE \itshape A curated reference of algorithms and data structures\par}
+            \vspace{1cm}
 
-  \vspace*{2cm}
-  {\Huge\bfseries ICPC Team Notebook\par}
-  \vspace{1cm}
+            \includegraphics[width=0.2 \textwidth]{img/logo.png}\par
+            \vspace{1cm}
 
-  {\Large {typedef unsigned long long uwu}\par}
-  {\Large {Sorbonne Université}\par}
-  {\Large SWERC 2025\par}
-  \vspace{1.5cm}
+            {\large \today\par}
 
-  \rule{\linewidth}{1.5pt}\par
-  \vspace{0.5cm}
-  \rule{\linewidth}{0.5pt}\par
-  \vspace{1.5cm}
+            \clearpage
+        \end{titlepage}
 
-  {\LARGE \itshape A curated reference of algorithms and data structures\par}
-  \vspace{1cm}
+        \clearpage
+        \tableofcontents
+        \newpage
+        
+        \pagestyle{fancy}
+        \begin{multicols}{2}
+        
+            %CONTENT%
 
-  \includegraphics[width=0.2 \textwidth]{img/logo.png}\par
-  \vspace{1cm}
-
-  {\large \today\par}
-
-  \clearpage
-\end{titlepage}
-
-
-\clearpage
-\tableofcontents
-
-\twocolumn
-
-%CONTENT%
-
+        \end{multicols}{2}
+    \end{landscape}
 \end{document}
+        

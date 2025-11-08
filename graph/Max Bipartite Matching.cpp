@@ -4,7 +4,7 @@ using namespace std;
 
 typedef vector<int> vi;
 
-// \textbf{Hopcroft–Karp} $O(E\sqrt{V})$.Max bipartite matching (left [0..nL-1], right [0..nR-1])
+// \textbf{Hopcroft–Karp} $O(E\sqrt{V})$ left [0..nL-1], right [0..nR-1]
 // adj from left to right.
 int nL, nR;
 vector<vi>adj;
