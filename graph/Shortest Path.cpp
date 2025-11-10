@@ -3,6 +3,7 @@
 using namespace std;
 
 typedef vector<int> vi;
+typedef vector<vi> vvi;
 typedef pair<int,int> pii;
 
 // Find shortest paths from src (no negative weights). O((V+E)logV)
@@ -24,11 +25,11 @@ vi dijkstra(const vector<vector<pii>>& adj, int src) {
 }
 
 // $O(VE)$ Shortest Path+neg edges; BFS from nodes with dist $-\infty$ for all neg-cycle reachable.
-vector<int> bellmanFord(int n, vector<vector<int>>& edges, int src) {
+vi bellmanFord(int n, vvi& edges, int src) {
 	vector<int> dist(n, INT_MAX);
 	dist[src] = 0;
 	for (int i = 0; i < n; i++) { 
-		for (vector<int> edge : edges) {
+		for (auto edge : edges) {
 			int u = edge[0];int v = edge[1];int wt = edge[2];
 			if (dist[u] != INT_MAX && dist[u] + wt < dist[v]) {
                 if(i == n - 1) return {-1};
