@@ -14,7 +14,7 @@ void dfs(int u, vector<vi> &adj, vi &vis, vi &res) {
 vi toposort(vector<vi> &adj) {
     int n = adj.size();
     vi vis(n, 0), res;
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
         if (!vis[i]) dfs(i, adj, vis, res);
     reverse(res.begin(), res.end());
     return res;
