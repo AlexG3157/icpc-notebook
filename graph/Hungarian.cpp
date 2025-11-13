@@ -4,7 +4,7 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
 
-// Min cost assignment $O(n^3)$. Input cost matrix, output (min cost, assignment )
+// Min cost assignment $O(n^3)$. Input cost matrix, output (min cost, assignment)
 pair<int, vi> hungarian(const vvi &a) {
     int n = a.size(), m = a[0].size();
     vi u(n + 1), v(m + 1), p(m + 1), way(m + 1);

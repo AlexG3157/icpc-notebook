@@ -20,7 +20,7 @@ struct SCC {
         ord[ordn++]=u;
     }
     void dfst(int u){
-        scc[u]=scc_cnt; vis[u]=0;
+        scc[u]=scc_cnt; vis[u]=0; // SCCs IDs are in reverse topological order.
         for(int v:adjt[u]) if(vis[v]) dfst(v);
     }
     void kosaraju(){

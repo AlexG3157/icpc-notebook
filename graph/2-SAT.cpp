@@ -13,8 +13,8 @@ struct TwoSAT {
     void add_clause(int a, bool a_val, int b, bool b_val){
         int u = a_val ? var(a) : neg(a);
         int v = b_val ? var(b) : neg(b);
-        g.add_edge(u^1, v); // ¬a -> b u XOR 1
-        g.add_edge(v^1, u); // ¬b -> a v XOR 1
+        g.add_edge(u^1, v); // ¬a -> b. ^ bitwise XOR, same in python
+        g.add_edge(v^1, u); // ¬b -> a
     }
     bool satisfiable(vi& ans){
         g.kosaraju();
