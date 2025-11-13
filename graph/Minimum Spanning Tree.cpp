@@ -21,7 +21,7 @@ int kruskal(int V, vvi &edges) {
     return cost;
 }
 // Prim's $O((E+V) \log V)$ adj[u] list of (v,weight) adjacent to u.
-int prim(int V, int E, vector<vpi> &adj) {
+int prim(int V, vector<vpi> &adj) {
     priority_queue<pii, vector<pii>, greater<pii>> q;
     vector<bool> vis(V, false);
     q.push({0, 0});
