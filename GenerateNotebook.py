@@ -8,7 +8,8 @@ SECTIONS = [
     ("Number Theory", "number"),
     ("Data Structures", "data"),
     ("Graph Algorithms", "graph"),
-    ("Arrays", "array")
+    ("Arrays", "array"),
+    ("Utilities", "utilities")
 ]
 
 IGNORE_PATTERNS = [
