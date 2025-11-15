@@ -8,8 +8,8 @@
 \usepackage{hyperref}                 
 \usepackage{titlesec}
 
-\titlespacing*{\section}{0pt}{0.25em}{0.15em}
-\titlespacing*{\subsection}{0pt}{0.2em}{0.1em}
+\titlespacing*{\section}{0pt}{0em}{0em}
+\titlespacing*{\subsection}{0pt}{0em}{0em}
 
 \pagestyle{fancy}
 \fancyhead[L]{Sorbonne Université}
@@ -24,7 +24,10 @@
 }
 
 \setlength{\columnsep}{12pt}       
-\setlength{\columnseprule}{0.4pt} 
+\setlength{\columnseprule}{0.4pt}
+\setlength{\parskip}{0pt}    
+\setlength{\parindent}{0pt}  
+
 
 \begin{document}
     \begin{landscape}
@@ -57,9 +60,9 @@
         \end{titlepage}
 
         \clearpage
+        \footnotesize
         \begin{multicols}{2}
         \tableofcontents
-        
         \pagestyle{fancy}
         
             %CONTENT%

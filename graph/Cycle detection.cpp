@@ -26,7 +26,7 @@ vi dfs_cycle(const vvi &adj) {
         if (color[i] == 0 && dfs(i)) break;
     return cycle;
 }
-// Check the undirected graph contains a cycle in ~$O(m)$.
+// Check if undirected graph contains a cycle in ~$O(m)$.
 bool dsu_cycle(int n, vvi &edges) {
     union_find uf(n); //c.f. union find
     for (auto &e : edges) { 

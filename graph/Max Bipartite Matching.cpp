@@ -4,6 +4,9 @@ using namespace std;
 
 typedef vector<int> vi;
 
+// \textbf{König's theorem:} In a bipartite graph, the number of edges 
+// in a maximum matching equals the number of vertices in a minimum vertex cover.\\
+
 // \textbf{Hopcroft–Karp} $O(E\sqrt{V})$ left [0..nL-1], right [0..nR-1]
 // adj from left to right.
 int nL, nR;
