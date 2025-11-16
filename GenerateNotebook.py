@@ -5,7 +5,7 @@ TEMPLATE_FILE = "template.tex"
 OUTPUT_FILE = "notebook.tex"
 
 SECTIONS = [
-    ("Number Theory", "number"),
+    ("Math", "math"),
     ("Data Structures", "data"),
     ("Graph Algorithms", "graph"),
     ("Dynamic Programming", "dp"),
