@@ -6,6 +6,10 @@ typedef vector<vi> vvi;
 typedef pair<int,int> pii;
 
 // \textbf{Traveling Salesman Problem} $O(n^2 2^n)$
+// DP formula: $\mathrm{dp}[S][i]$: min cost to start at $0$, visit all $v\in S$, end at $i$.
+// $\mathrm{dp}[\{0\}][0]=0$.
+// $\mathrm{dp}[S][i]=\min_{j\in S\setminus\{i\}}\mathrm{dp}[S\setminus\{i\}][j]+w_{j,i}$.
+// Ans $=\min_i\mathrm{dp}[V][i]+w_{i,0}$.
 int tsp(int n, vvi& dist) {
     int mask_limit = 1 << n;
     vvi dp(mask_limit, vi(n, INT_MAX));

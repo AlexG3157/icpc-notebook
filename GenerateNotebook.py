@@ -8,6 +8,7 @@ SECTIONS = [
     ("Number Theory", "number"),
     ("Data Structures", "data"),
     ("Graph Algorithms", "graph"),
+    ("Dynamic Programming", "dp"),
     ("Strings", "strings"),
     ("Arrays", "array"),
     ("Utilities", "utilities")
