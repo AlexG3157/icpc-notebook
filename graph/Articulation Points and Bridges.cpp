@@ -9,7 +9,8 @@ typedef pair<int,int> pii;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
 typedef pair<int, int> pii;
-
+// Biconnected components: maximal subgraph that stays connected if any one vertex is removed.
+// Articulation points connect multiple BCCs; edges in each child subtree of an AP form a BCC.
 //$O(V+E)$\\
 //AP = vertices whose removal increases \# of connected components.\\
 //Bridge = edges whose removal increases \# of connected components.

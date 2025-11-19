@@ -1,4 +1,4 @@
-\section{Triangles}
+\textbf{Triangles}
 Triangle dont les côtés sont $a,b,c$, les hauteurs sont $h_a, h_b, h_c$, les médianes sont
  $m_a, m_b, m_c$, le demi-perímètre est $s = \dfrac{a + b + c}{2}$ et l'aire est $A$. $\eta=\frac{1}{4R}$\\
 
@@ -23,9 +23,9 @@ Triangle dont les côtés sont $a,b,c$, les hauteurs sont $h_a, h_b, h_c$, les m
 	$ \dfrac{a+b}{a-b}=\dfrac{\tan\dfrac{\alpha+\beta}{2}}{\tan\dfrac{\alpha-\beta}{2}} $
 \end{description}
 
-\section{Quadrilatères}
+\textbf{Quadrilatères}
 
-\subsection{Quadrilatères cycliques (inscriptibles)}
+\textbf{Quadrilatères cycliques (inscriptibles)}
 Soit un quadrilatère \textbf{cyclique} de côtés $a, b, c, d$ et diagonales $e, f$. Alors $ef = ac + bd$ et l'aire $A$ peut être calculée grâce à la
 
 \begin{description}
@@ -34,9 +34,17 @@ Soit un quadrilatère \textbf{cyclique} de côtés $a, b, c, d$ et diagonales $e
 	où $s = \dfrac{a + b + c + d}{2}$
 \end{description}
 
-\section{Coordonnées sphériques}
+\textbf{Coordonnées sphériques}
 \[\begin{array}{cc}
 x = r\sin\theta\cos\phi & r = \sqrt{x^2+y^2+z^2}\\
 y = r\sin\theta\sin\phi & \theta = \texttt{acos}(z/\sqrt{x^2+y^2+z^2})\\
 z = r\cos\theta & \phi = \texttt{atan2}(y,x)
 \end{array}\]
+
+\textbf{Centre de gravité:}
+Soit $A$ un sous-ensemble mesurable borné de $\mathbb{R}^d$, de mesure positive. Le centre de
+gravité de $A$ est le point $G = (g_1, . . . , g_d) \in \mathbb{R}^d$ dont les coordonnées sont 
+définies par:
+\[ 
+	g_i = \frac{1}{\lambda(A)} \int_A x_i dx_1 \ldots dx_d
+\]

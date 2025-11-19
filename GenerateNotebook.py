@@ -25,10 +25,15 @@ IGNORE_PATTERNS_PYTHON = [
     r'^\s*(import|from)\b'
 ]
 
+DONT_PARSE = [
+    "utilities/STL.cpp"
+]
+
 COMMENT_RE = re.compile(r'^\s*//\s*(.*)$') 
 COMMENT_RE_PY = re.compile(r'^\s*#\s*(.*)$')
 
 def process_cpp_file(path):
+    should_parse = path not in DONT_PARSE
     lines = []
     code_block = []
 
@@ -36,11 +41,11 @@ def process_cpp_file(path):
         for line in f:
             raw = line.rstrip()
 
-            if any(re.match(p, raw) for p in IGNORE_PATTERNS):
+            if should_parse and any(re.match(p, raw) for p in IGNORE_PATTERNS):
                 continue
 
             m = COMMENT_RE.match(raw)
-            if m:
+            if should_parse and m:
                 if(code_block):
                     lines.append("\\begin{minted}{cpp}\n" + "\n".join(code_block) + "\n\\end{minted}\n")
                     code_block = []

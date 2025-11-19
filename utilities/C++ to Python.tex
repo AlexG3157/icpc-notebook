@@ -1,0 +1,168 @@
+\textbf{Initialization / Fixed size}
+\begin{minted}{cpp}
+vector<int> v(n, 0);           // size n, all 0
+vector<vector<int>> g(n, vector<int>(m, 0));
+\end{minted}
+
+\begin{minted}{python}
+v = [0]*n
+g = [[0]*m for _ in range(n)]   # avoid [[0]*m]*n
+\end{minted}
+
+\textbf{Push / Pop / Insert / Erase}
+\begin{minted}{cpp}
+v.push_back(x);         
+v.pop_back();
+v.insert(v.begin()+i, x);
+v.erase(v.begin()+i);
+v.erase(remove(v.begin(), v.end(), x), v.end()); // remove all x
+\end{minted}
+
+\begin{minted}{python}
+v.append(x)
+v.pop()
+v.insert(i, x)
+del v[i]
+v = [e for e in v if e != x]   # remove all x
+\end{minted}
+
+\textbf{Sorting / Unique / Reverse}
+\begin{minted}{cpp}
+sort(v.begin(), v.end());
+sort(v.rbegin(), v.rend());
+v.erase(unique(v.begin(), v.end()), v.end());
+reverse(v.begin(), v.end());
+\end{minted}
+
+\begin{minted}{python}
+v.sort()
+v.sort(reverse=True)
+v = sorted(set(v))      # deduplicate
+v.reverse()
+\end{minted}
+
+\textbf{Binary search / Search}
+\begin{minted}{cpp}
+auto it = lower_bound(v.begin(), v.end(), x);
+bool exists = (find(v.begin(), v.end(), x) != v.end());
+\end{minted}
+
+\begin{minted}{python}
+import bisect
+i = bisect.bisect_left(v, x)
+exists = x in v
+\end{minted}
+
+\textbf{Prefix sums / Accumulation}
+\begin{minted}{cpp}
+vector<int> pre(n+1);
+for(int i=0;i<n;i++) pre[i+1] = pre[i]+v[i];
+int total = accumulate(v.begin(), v.end(), 0);
+\end{minted}
+
+\begin{minted}{python}
+pre = [0]
+for x in v: pre.append(pre[-1]+x)
+total = sum(v)
+\end{minted}
+
+\textbf{Rotate}
+\begin{minted}{cpp}
+rotate(v.begin(), v.begin()+k, v.end());
+\end{minted}
+
+\begin{minted}{python}
+v = v[k:] + v[:k]
+\end{minted}
+
+\textbf{Set / Multiset}
+\begin{minted}{cpp}
+set<int> s;          // unique, ordered
+s.insert(x); s.erase(x);
+multiset<int> ms;    // allows duplicates
+ms.insert(x); ms.erase(ms.find(x));
+\end{minted}
+
+\begin{minted}{python}
+s = set()
+s.add(x); s.discard(x)
+from collections import Counter
+ms = Counter()
+ms[x]+=1; ms[x]-=1; 
+if ms[x]==0: del ms[x]
+\end{minted}
+
+\textbf{Map / Dictionary}
+\begin{minted}{cpp}
+unordered_map<int,int> mp;
+mp[x] = y;
+if(mp.count(x)) ...
+\end{minted}
+
+\begin{minted}{python}
+mp = {}
+mp[x] = y
+if x in mp:
+    ...
+\end{minted}
+
+\textbf{Priority Queue / Heap}
+\begin{minted}{cpp}
+priority_queue<int> pq;                    // max-heap
+priority_queue<int, vector<int>, greater<int>> pq; // min-heap
+pq.push(x); pq.pop(); pq.top();
+\end{minted}
+
+\begin{minted}{python}
+import heapq
+pq = []
+heapq.heappush(pq, -x)  # max-heap
+x = -heapq.heappop(pq)
+heapq.heappush(pq, x)   # min-heap
+x = heapq.heappop(pq)
+\end{minted}
+
+\textbf{Queue / Deque}
+\begin{minted}{cpp}
+queue<int> q;
+q.push(x); q.pop(); q.front(); q.back();
+deque<int> dq;
+dq.push_front(x); dq.pop_back();
+\end{minted}
+
+\begin{minted}{python}
+from collections import deque
+q = deque()
+q.append(x); q.popleft()
+dq = deque()
+dq.appendleft(x); dq.pop()
+\end{minted}
+
+\textbf{Graph / Adjacency List}
+\begin{minted}{cpp}
+vector<vector<int>> g(n);
+g[u].push_back(v);   // directed
+\end{minted}
+
+\begin{minted}{python}
+g = [[] for _ in range(n)]
+g[u].append(v)
+\end{minted}
+
+\textbf{Bit tricks / Masks}
+\begin{minted}{cpp}
+(x>>k)&1       // check bit
+x |= (1<<k)    // set
+x &= ~(1<<k)   // clear
+x ^= (1<<k)    // toggle
+__builtin_popcount(x) // number of 1s in binary
+\end{minted}
+
+\begin{minted}{python}
+(x>>k)&1
+x |= (1<<k)
+x &= ~(1<<k)
+x ^= (1<<k)
+bin(x).count('1')   # popcount
+x.bit_count()       # Python 3.10+
+\end{minted}
