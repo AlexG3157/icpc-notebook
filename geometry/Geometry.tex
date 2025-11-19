@@ -1,0 +1,42 @@
+\section{Triangles}
+Triangle dont les côtés sont $a,b,c$, les hauteurs sont $h_a, h_b, h_c$, les médianes sont
+ $m_a, m_b, m_c$, le demi-perímètre est $s = \dfrac{a + b + c}{2}$ et l'aire est $A$. $\eta=\frac{1}{4R}$\\
+
+\begin{description}
+	\item[Heron-like area formulae]
+		\begin{align*} 
+		A &= \sqrt{s(s-a)(s-b)(s-c)}\\
+			&= \left( 4 \sqrt{\eta (\eta - h_a^{-1}) (\eta - h_b^{-1}) (\eta - h_c^{-1})} \right)^{-1} \\
+			&= \dfrac{4}{3} \sqrt{s(s - m_a)(s - m_b)(s - m_c)}
+		\end{align*}
+	\item[Rayon du cercle circonscrit] $R = \dfrac{abc}{4A}$
+	\item[Rayon du cercle inscrit] $r=\dfrac{A}{s}$
+	\item[Médianes] divisent en deux sous-triangles de même aire.
+		\[ m_a=\dfrac{1}{2}\sqrt{2b^2 + 2c^2 - a^2} \]
+	\item[Bissectrices] divisen les angles en deux parties égales.
+		\[ b_a=\sqrt{bc\left(1-\left(\dfrac{a}{b+c}\right)^2\right)}\]
+	\item[Loi des sinus]
+	$ \dfrac{\sin\alpha}{a}=\dfrac{\sin\beta}{b}=\dfrac{\sin\gamma}{c}=\dfrac{1}{2R}$
+	\item[Loi des cosinus]
+	$ a^2=b^2+c^2-2bc\cos\alpha $
+	\item[Théorème de la tangente]
+	$ \dfrac{a+b}{a-b}=\dfrac{\tan\dfrac{\alpha+\beta}{2}}{\tan\dfrac{\alpha-\beta}{2}} $
+\end{description}
+
+\section{Quadrilatères}
+
+\subsection{Quadrilatères cycliques (inscriptibles)}
+Soit un quadrilatère \textbf{cyclique} de côtés $a, b, c, d$ et diagonales $e, f$. Alors $ef = ac + bd$ et l'aire $A$ peut être calculée grâce à la
+
+\begin{description}
+	\item[Formule de Brahmagupta]
+	\[A = \sqrt{(s - a)(s - b)(s - c)(s - d)}\]
+	où $s = \dfrac{a + b + c + d}{2}$
+\end{description}
+
+\section{Coordonnées sphériques}
+\[\begin{array}{cc}
+x = r\sin\theta\cos\phi & r = \sqrt{x^2+y^2+z^2}\\
+y = r\sin\theta\sin\phi & \theta = \texttt{acos}(z/\sqrt{x^2+y^2+z^2})\\
+z = r\cos\theta & \phi = \texttt{atan2}(y,x)
+\end{array}\]

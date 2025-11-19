@@ -5,12 +5,13 @@ TEMPLATE_FILE = "template.tex"
 OUTPUT_FILE = "notebook.tex"
 
 SECTIONS = [
-    ("Math", "math"),
     ("Data Structures", "data"),
     ("Graph Algorithms", "graph"),
     ("Dynamic Programming", "dp"),
     ("Strings", "strings"),
     ("Arrays", "array"),
+    ("Math", "math"),
+    ("Geometry", "geometry"),
     ("Utilities", "utilities")
 ]
 
