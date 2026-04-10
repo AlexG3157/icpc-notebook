@@ -7,8 +7,8 @@ using namespace std;
 struct TwoSAT {
     int n; SCC g; // c.f. strongly connected components
     TwoSAT(int vars): n(vars), g(2*vars) {}
-    int var(int i){ return i; }
-    int neg(int i){ return i+n; }
+    int var(int i){ return 2*i; }
+    int neg(int i){ return 2*i+1; }
 
     void add_clause(int a, bool a_val, int b, bool b_val){
         int u = a_val ? var(a) : neg(a);
